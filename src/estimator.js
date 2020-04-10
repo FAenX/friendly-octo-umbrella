@@ -1,10 +1,10 @@
-
+// impact: currently Infected
+const currentlyInfectedImpact = (data) => data.reportedCases * 10;
 // impact: infectionsByRequestedTime
 const infectionsByRequestedTimeImpact = (data) => {
   const factor = Math.floor(data.timeToElapse / 3);
-  return data.impact.currentlyInfected * (2 ** factor);
+  return currentlyInfectedImpact(data) * (2 ** factor);
 };
-
 
 // impact: severeCasesByRequestedTime
 const severeCasesByRequestedTimeImpact = () => {};
@@ -27,7 +27,7 @@ const covid19ImpactEstimator = (data) => {
     data,
     estimate: {
       impact: {
-        currentlyInfected: data.reportedCases * 10,
+        currentlyInfected: currentlyInfectedImpact(data),
         infectionsByRequestedTime: infectionsByRequestedTimeImpact(data),
         severeCasesByRequestedTime: severeCasesByRequestedTimeImpact(data),
         hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact(data),
