@@ -5,7 +5,7 @@ const currentlyInfectedImpact = (data) => data.reportedCases * 10;
 const currentlyInfectedSevereImpact = (data) => data.reportedCases * 50;
 
 // impact: infectionsByRequestedTime
-const infectionsByRequestedTimeImpact = (data) => {
+const IBRTImpact = (data) => {
   let factor;
   if (data.periodType === 'days') {
     factor = Math.floor(data.timeToElapse / 3);
@@ -19,7 +19,7 @@ const infectionsByRequestedTimeImpact = (data) => {
 };
 
 // severe impact
-const infectionsByRequestedTimeSevereImpact = (data) => {
+const IBRTSevereImpact = (data) => {
   let factor;
   if (data.periodType === 'days') {
     factor = Math.floor(data.timeToElapse / 3);
@@ -33,28 +33,28 @@ const infectionsByRequestedTimeSevereImpact = (data) => {
 
 
 // impact: severeCasesByRequestedTime
-const SCBTImpact = (data) => (15 / 100) * infectionsByRequestedTimeImpact(data);
+const SCBTImpact = (data) => (15 / 100) * IBRTImpact(data);
 
 // severe impact
-const SCBTSevereImpact = (data) => (15 / 100) * infectionsByRequestedTimeSevereImpact(data);
+const SCBTSevereImpact = (data) => (15 / 100) * IBRTSevereImpact(data);
 
 // impact: hospitalBedsByRequestedTime
-const hospitalBedsByRequestedTimeImpact = (data) => (35 / 100) * data.totalHospitalBeds;
+const HBBRTImpact = (data) => Math.floor((35 / 100) * data.totalHospitalBeds);
 
 // severe impact
-const hospitalBedsByRequestedTimeSevereImpact = () => {};
+const HBBRTSevereImpact = (data) => Math.floor((35 / 100) * data.totalHospitalBeds);
 
 // impact: casesForICUByRequestedTime
-const casesForICUByRequestedTimeImpact = () => {};
+const casesForICUByRequestedTimeImpact = (data) => (5 / 100) * IBRTImpact(data);
 
 // severe impact
-const casesForICUByRequestedTimeSevereImpact = () => {};
+const casesForICUByRequestedTimeSevereImpact = (data) => (5 / 100) * IBRTSevereImpact(data);
 
 // impact: casesForVentilatorsByRequestedTime
-const casesForVentilatorsByRequestedTimeImpact = () => {};
+const casesForVentilatorsByRequestedTimeImpact = (data) => (2 / 100) * IBRTImpact(data);
 
 // severe impact
-const casesForVentilatorsByRequestedTimeSevereImpact = () => {};
+const casesForVentilatorsByRequestedTimeSevereImpact = (data) => (2 / 100) * IBRTSevereImpact(data);
 
 // impact: dollarsInFlight
 const dollarsInFlightImpact = () => {};
@@ -69,9 +69,9 @@ const covid19ImpactEstimator = (data) => {
     estimate: {
       impact: {
         currentlyInfected: currentlyInfectedImpact(data),
-        infectionsByRequestedTime: infectionsByRequestedTimeImpact(data),
+        infectionsByRequestedTime: IBRTImpact(data),
         severeCasesByRequestedTime: SCBTImpact(data),
-        hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact(data),
+        hospitalBedsByRequestedTime: HBBRTImpact(data),
         casesForICUByRequestedTime: casesForICUByRequestedTimeImpact(data),
         casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeImpact(data),
         dollarsInFlight: dollarsInFlightImpact(data)
@@ -79,9 +79,9 @@ const covid19ImpactEstimator = (data) => {
       },
       severeImpact: {
         currentlyInfected: currentlyInfectedSevereImpact(data),
-        infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact(data),
+        infectionsByRequestedTime: IBRTSevereImpact(data),
         severeCasesByRequestedTime: SCBTSevereImpact(data),
-        hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevereImpact(data),
+        hospitalBedsByRequestedTime: HBBRTSevereImpact(data),
         casesForICUByRequestedTime: casesForICUByRequestedTimeSevereImpact(data),
         casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevereImpact(data),
         dollarsInFlight: dollarsInFlightSevereImpact(data)
