@@ -2,7 +2,7 @@
 const currentlyInfectedImpact = (data) => data.reportedCases * 10;
 // impact: infectionsByRequestedTime
 const infectionsByRequestedTimeImpact = (data) => {
-  const factor = Math.floor(data.timeToElapse / 3);
+  const factor = Math.round(data.timeToElapse / 3);
   return currentlyInfectedImpact(data) * (2 ** factor);
 };
 
