@@ -18,10 +18,10 @@ const infectionsByRequestedTimeSevereImpact = (data) => {
 
 
 // impact: severeCasesByRequestedTime
-const severeCasesByRequestedTimeImpact = (data) => (15 / 100) * infectionsByRequestedTimeImpact(data);
+const SCBTImpact = (data) => (15 / 100) * infectionsByRequestedTimeImpact(data);
 
 // severe impact
-const severeCasesByRequestedTimeSevereImpact = (data) => (15 / 100) * infectionsByRequestedTimeSevereImpact(data);
+const SCBTSevereImpact = (data) => (15 / 100) * infectionsByRequestedTimeSevereImpact(data);
 
 // impact: hospitalBedsByRequestedTime
 const hospitalBedsByRequestedTimeImpact = (data) => (35 / 100) * data.totalHospitalBeds;
@@ -55,7 +55,7 @@ const covid19ImpactEstimator = (data) => {
       impact: {
         currentlyInfected: currentlyInfectedImpact(data),
         infectionsByRequestedTime: infectionsByRequestedTimeImpact(data),
-        severeCasesByRequestedTime: severeCasesByRequestedTimeImpact(data),
+        severeCasesByRequestedTime: SCBTImpact(data),
         hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact(data),
         casesForICUByRequestedTime: casesForICUByRequestedTimeImpact(data),
         casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeImpact(data),
@@ -65,7 +65,7 @@ const covid19ImpactEstimator = (data) => {
       severeImpact: {
         currentlyInfected: currentlyInfectedSevereImpact(data),
         infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact(data),
-        severeCasesByRequestedTime: severeCasesByRequestedTimeSevereImpact(data),
+        severeCasesByRequestedTime: SCBTSevereImpact(data),
         hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevereImpact(data),
         casesForICUByRequestedTime: casesForICUByRequestedTimeSevereImpact(data),
         casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevereImpact(data),
