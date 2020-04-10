@@ -65,9 +65,10 @@ const IBRTSevereImpact = (data) => {
 
 const covid19ImpactEstimator = (data) => {
   const response = {
-    data,
+
     estimate: {
       impact: {
+
         currentlyInfected: currentlyInfectedImpact(data),
         infectionsByRequestedTime: IBRTImpact(data)
         // severeCasesByRequestedTime: SCBTImpact(data),
