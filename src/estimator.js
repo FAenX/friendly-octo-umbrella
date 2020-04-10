@@ -57,10 +57,10 @@ const CFVBRTImpact = (data) => Math.floor(0.02 * IBRTImpact(data));
 const CFVBRTSevereImpact = (data) => Math.floor(0.02 * IBRTSevereImpact(data));
 
 // impact: dollarsInFlight
-const dollarsInFlightImpact = () => {};
+const dollarsInFlightImpact = () => 400;
 
 // severe impact
-const dollarsInFlightSevereImpact = () => {};
+const dollarsInFlightSevereImpact = () => 400;
 
 
 const covid19ImpactEstimator = (data) => {
