@@ -19,7 +19,7 @@ const IBRTImpact = (data) => {
 };
 
 // severe impact
-const IBRTSevereImpact = (data) => {
+const IBRT_SI = (data) => {
   let factor;
   if (data.periodType === 'days') {
     factor = Math.floor(data.timeToElapse / 3);
@@ -36,25 +36,25 @@ const IBRTSevereImpact = (data) => {
 const SCBTImpact = (data) => Math.floor(0.15 * IBRTImpact(data));
 
 // severe impact
-const SCBTSevereImpact = (data) => Math.floor(0.15 * IBRTSevereImpact(data));
+const SCBT_SI = (data) => Math.floor(0.15 * IBRT_SI(data));
 
 // impact: hospitalBedsByRequestedTime
-const HBBRTImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
+const HBBRTImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds) - SCBTImpact(data);
 
 // severe impact
-const HBBRTSevereImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
+const HBBRT_SI = (data) => Math.floor(0.35 * data.totalHospitalBeds) - SCBT_SI(data);
 
 // impact: casesForICUByRequestedTime
 const CFICUBImpact = (data) => Math.floor(0.05 * IBRTImpact(data));
 
 // severe impact
-const CFICUBSevereImpact = (data) => Math.floor(0.05 * IBRTSevereImpact(data));
+const CFICUB_SI = (data) => Math.floor(0.05 * IBRT_SI(data));
 
 // impact: casesForVentilatorsByRequestedTime
 const CFVBRTImpact = (data) => Math.floor(0.02 * IBRTImpact(data));
 
 // severe impact
-const CFVBRTSevereImpact = (data) => Math.floor(0.02 * IBRTSevereImpact(data));
+const CFVBRT_SI = (data) => Math.floor(0.02 * IBRT_SI(data));
 
 // impact: dollarsInFlight
 const dollarsInFlightImpact = () => 400;
@@ -78,11 +78,11 @@ const covid19ImpactEstimator = (data) => ({
   },
   severeImpact: {
     currentlyInfected: currentlyInfectedSevereImpact(data),
-    infectionsByRequestedTime: IBRTSevereImpact(data),
-    severeCasesByRequestedTime: SCBTSevereImpact(data),
-    hospitalBedsByRequestedTime: HBBRTSevereImpact(data),
-    casesForICUByRequestedTime: CFICUBSevereImpact(data),
-    casesForVentilatorsByRequestedTime: CFVBRTSevereImpact(data),
+    infectionsByRequestedTime: IBRT_SI(data),
+    severeCasesByRequestedTime: SCBT_SI(data),
+    hospitalBedsByRequestedTime: HBBRT_SI(data),
+    casesForICUByRequestedTime: CFICUB_SI(data),
+    casesForVentilatorsByRequestedTime: CFVBRT_SI(data),
     dollarsInFlight: dollarsInFlightSevereImpact(data)
 
   }
