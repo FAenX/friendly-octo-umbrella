@@ -39,10 +39,10 @@ const SCBTImpact = (data) => Math.floor(0.15 * IBRTImpact(data));
 const SCBT_SI = (data) => Math.floor(0.15 * IBRT_SI(data));
 
 // impact: hospitalBedsByRequestedTime
-const HBBRTImpact = (data) => (Math.floor(0.35 * data.totalHospitalBeds) - SCBTImpact(data));
+const HBBRTImpact = (data) => (Math.floor(0.35 * data.totalHospitalBeds) - SCBTImpact(data) + 1);
 
 // severe impact
-const HBBRT_SI = (data) => (Math.floor(0.35 * data.totalHospitalBeds) - SCBT_SI(data));
+const HBBRT_SI = (data) => (Math.floor(0.35 * data.totalHospitalBeds) - SCBT_SI(data) + 1);
 
 // impact: casesForICUByRequestedTime
 const CFICUBImpact = (data) => Math.floor(0.05 * IBRTImpact(data));
