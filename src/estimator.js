@@ -2,7 +2,7 @@
 // impact: infectionsByRequestedTime
 const infectionsByRequestedTimeImpact = (data) => {
   const factor = Math.floor(data.timeToElapse / 3);
-  return data.impact.currentlyInfected * 2 ^ factor;
+  return data.impact.currentlyInfected * (2 ** factor);
 };
 
 
