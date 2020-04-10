@@ -32,66 +32,61 @@ const IBRTSevereImpact = (data) => {
 };
 
 
-// // impact: severeCasesByRequestedTime
-// const SCBTImpact = (data) => Math.floor(0.15 * IBRTImpact(data));
+// impact: severeCasesByRequestedTime
+const SCBTImpact = (data) => Math.floor(0.15 * IBRTImpact(data));
 
-// // severe impact
-// const SCBTSevereImpact = (data) => Math.floor(0.15 * IBRTSevereImpact(data));
+// severe impact
+const SCBTSevereImpact = (data) => Math.floor(0.15 * IBRTSevereImpact(data));
 
-// // impact: hospitalBedsByRequestedTime
-// const HBBRTImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
+// impact: hospitalBedsByRequestedTime
+const HBBRTImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
 
-// // severe impact
-// const HBBRTSevereImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
+// severe impact
+const HBBRTSevereImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
 
-// // impact: casesForICUByRequestedTime
-// const CFICUBImpact = (data) => Math.floor(0.05 * IBRTImpact(data));
+// impact: casesForICUByRequestedTime
+const CFICUBImpact = (data) => Math.floor(0.05 * IBRTImpact(data));
 
-// // severe impact
-// const CFICUBSevereImpact = (data) => Math.floor(0.05 * IBRTSevereImpact(data));
+// severe impact
+const CFICUBSevereImpact = (data) => Math.floor(0.05 * IBRTSevereImpact(data));
 
-// // impact: casesForVentilatorsByRequestedTime
-// const CFVBRTImpact = (data) => Math.floor(0.02 * IBRTImpact(data));
+// impact: casesForVentilatorsByRequestedTime
+const CFVBRTImpact = (data) => Math.floor(0.02 * IBRTImpact(data));
 
-// // severe impact
-// const CFVBRTSevereImpact = (data) => Math.floor(0.02 * IBRTSevereImpact(data));
+// severe impact
+const CFVBRTSevereImpact = (data) => Math.floor(0.02 * IBRTSevereImpact(data));
 
-// // impact: dollarsInFlight
-// const dollarsInFlightImpact = () => 400;
+// impact: dollarsInFlight
+const dollarsInFlightImpact = () => 400;
 
-// // severe impact
-// const dollarsInFlightSevereImpact = () => 400;
+// severe impact
+const dollarsInFlightSevereImpact = () => 400;
 
 
-const covid19ImpactEstimator = (data) => {
-  const response = {
+const covid19ImpactEstimator = (data) => ({
 
-    estimate: {
-      impact: {
+  impact: {
 
-        currentlyInfected: currentlyInfectedImpact(data),
-        infectionsByRequestedTime: IBRTImpact(data)
-        // severeCasesByRequestedTime: SCBTImpact(data),
-        // hospitalBedsByRequestedTime: HBBRTImpact(data),
-        // casesForICUByRequestedTime: CFICUBImpact(data),
-        // casesForVentilatorsByRequestedTime: CFVBRTImpact(data),
-        // dollarsInFlight: dollarsInFlightImpact(data)
+    currentlyInfected: currentlyInfectedImpact(data),
+    infectionsByRequestedTime: IBRTImpact(data),
+    severeCasesByRequestedTime: SCBTImpact(data),
+    hospitalBedsByRequestedTime: HBBRTImpact(data),
+    casesForICUByRequestedTime: CFICUBImpact(data),
+    casesForVentilatorsByRequestedTime: CFVBRTImpact(data),
+    dollarsInFlight: dollarsInFlightImpact(data)
 
-      },
-      severeImpact: {
-        currentlyInfected: currentlyInfectedSevereImpact(data),
-        infectionsByRequestedTime: IBRTSevereImpact(data)
-        // severeCasesByRequestedTime: SCBTSevereImpact(data),
-        // hospitalBedsByRequestedTime: HBBRTSevereImpact(data),
-        // casesForICUByRequestedTime: CFICUBSevereImpact(data),
-        // casesForVentilatorsByRequestedTime: CFVBRTSevereImpact(data),
-        // dollarsInFlight: dollarsInFlightSevereImpact(data)
+  },
+  severeImpact: {
+    currentlyInfected: currentlyInfectedSevereImpact(data),
+    infectionsByRequestedTime: IBRTSevereImpact(data),
+    severeCasesByRequestedTime: SCBTSevereImpact(data),
+    hospitalBedsByRequestedTime: HBBRTSevereImpact(data),
+    casesForICUByRequestedTime: CFICUBSevereImpact(data),
+    casesForVentilatorsByRequestedTime: CFVBRTSevereImpact(data),
+    dollarsInFlight: dollarsInFlightSevereImpact(data)
 
-      }
-    }
+  }
 
-  };
-  return response;
-};
+});
 
 export default covid19ImpactEstimator;
