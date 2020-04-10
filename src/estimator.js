@@ -57,10 +57,34 @@ const CFVBRTImpact = (data) => Math.floor(0.02 * IBRTImpact(data));
 const CFVBRT_SI = (data) => Math.floor(0.02 * IBRT_SI(data));
 
 // impact: dollarsInFlight
-const dollarsInFlightImpact = () => 400;
+const dollarsInFlightImpact = (data) => {
+  let period;
+  if (data.periodType === 'days') {
+    period = data.timeToElapse;
+  } else if (data.periodType === 'weeks') {
+    period = data.timeToElapse * 7;
+  } else if (data.periodType === 'months') {
+    period = data.timeToElapse * 30;
+  }
+  const ADI = data.region.avgDailyIncomePopulation;
+
+  return IBRTImpact(data) * ADI * data.region.avgDailyIncomeInUSD * period;
+};
 
 // severe impact
-const dollarsInFlightSevereImpact = () => 400;
+const dollarsInFlightSevereImpact = (data) => {
+  let period;
+  if (data.periodType === 'days') {
+    period = data.timeToElapse;
+  } else if (data.periodType === 'weeks') {
+    period = data.timeToElapse * 7;
+  } else if (data.periodType === 'months') {
+    period = data.timeToElapse * 30;
+  }
+  const ADI = data.region.avgDailyIncomePopulation;
+
+  return IBRT_SI(data) * ADI * data.region.avgDailyIncomeInUSD * period;
+};
 
 
 const covid19ImpactEstimator = (data) => ({
