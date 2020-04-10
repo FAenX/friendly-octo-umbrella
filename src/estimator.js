@@ -33,28 +33,28 @@ const IBRTSevereImpact = (data) => {
 
 
 // impact: severeCasesByRequestedTime
-const SCBTImpact = (data) => (15 / 100) * IBRTImpact(data);
+const SCBTImpact = (data) => 0.15 * IBRTImpact(data);
 
 // severe impact
-const SCBTSevereImpact = (data) => (15 / 100) * IBRTSevereImpact(data);
+const SCBTSevereImpact = (data) => 0.15 * IBRTSevereImpact(data);
 
 // impact: hospitalBedsByRequestedTime
-const HBBRTImpact = (data) => Math.floor((35 / 100) * data.totalHospitalBeds);
+const HBBRTImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
 
 // severe impact
-const HBBRTSevereImpact = (data) => Math.floor((35 / 100) * data.totalHospitalBeds);
+const HBBRTSevereImpact = (data) => Math.floor(0.35 * data.totalHospitalBeds);
 
 // impact: casesForICUByRequestedTime
-const casesForICUByRequestedTimeImpact = (data) => (5 / 100) * IBRTImpact(data);
+const casesForICUByRequestedTimeImpact = (data) => 0.05 * IBRTImpact(data);
 
 // severe impact
-const casesForICUByRequestedTimeSevereImpact = (data) => (5 / 100) * IBRTSevereImpact(data);
+const casesForICUByRequestedTimeSevereImpact = (data) => 0.05 * IBRTSevereImpact(data);
 
 // impact: casesForVentilatorsByRequestedTime
-const casesForVentilatorsByRequestedTimeImpact = (data) => (2 / 100) * IBRTImpact(data);
+const casesForVentilatorsByRequestedTimeImpact = (data) => 0.02 * IBRTImpact(data);
 
 // severe impact
-const casesForVentilatorsByRequestedTimeSevereImpact = (data) => (2 / 100) * IBRTSevereImpact(data);
+const casesForVentilatorsByRequestedTimeSevereImpact = (data) => 0.02 * IBRTSevereImpact(data);
 
 // impact: dollarsInFlight
 const dollarsInFlightImpact = () => {};
