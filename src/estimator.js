@@ -66,9 +66,9 @@ const dollarsInFlightImpact = (data) => {
   } else if (data.periodType === 'months') {
     period = data.timeToElapse * 30;
   }
-  const ADI = data.region.avgDailyIncomePopulation;
+  const ADIP = data.region.avgDailyIncomePopulation;
 
-  return IBRTImpact(data) * ADI * data.region.avgDailyIncomeInUSD * period;
+  return Math.round((IBRTImpact(data) * ADIP * data.region.avgDailyIncomeInUSD) * period);
 };
 
 // severe impact
@@ -81,9 +81,9 @@ const dollarsInFlightSevereImpact = (data) => {
   } else if (data.periodType === 'months') {
     period = data.timeToElapse * 30;
   }
-  const ADI = data.region.avgDailyIncomePopulation;
+  const ADIP = data.region.avgDailyIncomePopulation;
 
-  return IBRT_SI(data) * ADI * data.region.avgDailyIncomeInUSD * period;
+  return Math.round((IBRT_SI(data) * ADIP * data.region.avgDailyIncomeInUSD) * period);
 };
 
 
