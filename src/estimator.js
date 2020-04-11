@@ -68,7 +68,7 @@ const dollarsInFlightImpact = (data) => {
   }
   const ADIP = data.region.avgDailyIncomePopulation;
 
-  return Math.round((IBRTImpact(data) * ADIP * data.region.avgDailyIncomeInUSD) / period);
+  return Math.trunc((IBRTImpact(data) * ADIP * data.region.avgDailyIncomeInUSD) / period);
 };
 
 // severe impact
@@ -83,7 +83,7 @@ const dollarsInFlightSevereImpact = (data) => {
   }
   const ADIP = data.region.avgDailyIncomePopulation;
 
-  return Math.round((IBRT_SI(data) * ADIP * data.region.avgDailyIncomeInUSD) / period);
+  return Math.trunc((IBRT_SI(data) * ADIP * data.region.avgDailyIncomeInUSD) / period);
 };
 
 
